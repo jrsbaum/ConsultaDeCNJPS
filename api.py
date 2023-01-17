@@ -1,20 +1,16 @@
 import requests
-from cfg import api1
+from cfg import api1, api2
 
 
-# from cfg import api2
-
-def get_res_api(cnpj):
-    url1 = f"{api1}{cnpj}"
-    # url2 = f"{api2}{cnpj}/json"
-
-    resp = requests.get(url1)
-
-    if resp.status_code == 200:
-        data = resp.json()
-        return data
-
-    else:
-        return {"erro": "Não foi possível obter as informações do CNPJ"}
-
-
+def get_data(cnpj):
+    data_list = []
+    for url in [api1, api2]:
+        try:
+            response = requests.get(f"{url}{cnpj}")
+            if response.status_code == 200:
+                data_list.append(response.json())
+            else:
+                raise ValueError(response.json()["erro"])
+        except ValueError as e:
+            data_list.append({"erro": e})
+    return data_list

@@ -1,7 +1,8 @@
 from pymongo import MongoClient
 from cfg import mongo_client_key
 
-def insert_to_mongodb(cnpj):
+
+def insert_to_db(cnpj):
     try:
         client = MongoClient(mongo_client_key)
         db = client.CNPJS
