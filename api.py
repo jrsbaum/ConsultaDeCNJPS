@@ -12,5 +12,5 @@ def get_data(cnpj):
             else:
                 raise ValueError(response.json()["erro"])
         except ValueError as e:
-            data_list.append({"erro": e})
+            data_list.append({"status": "invalid", "erro": e})
     return data_list
