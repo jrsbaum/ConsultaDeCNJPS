@@ -1,5 +1,6 @@
 # ConsultaDeCNJPS
-### Descrição: Consulta CNPJS em duas APIs, compara qual melhor resultado e insere ele no banco de dados.
+#### Descrição: Consulta CNPJS em duas APIs, imprime os resultados e insere eles no banco de dados. Obs.: Este programa usa 2 APIs públicas grátis que tem limite de 3 consultas por minuto.
+____
 
 ## Documentação
 
@@ -23,6 +24,12 @@ insert_to_db()
 ```
 ##### A função `insert_to_db` é usada para inserir dados em um banco de dados. Ela usa o parâmetro `cnpj` como o dado a ser inserido
 ##### Primeiro, ela tenta criar uma conexão com o banco de dados usando a `chave de cliente` fornecida. Em seguida, ela seleciona a coleção de CNPJs e insere o dado passado como parâmetro. Se ocorrer algum erro ao tentar inserir os dados, uma exceção será gerada e uma mensagem de erro será exibida.
+
+```
+validador_cnpj()
+```
+##### Esta função valida um `CNPJ` passado como parâmetro.
+##### Ele remove qualquer caractere não numérico do `CNPJ`, verifica se o `CNPJ` tem 14 dígitos, calcula os dígitos verificadores baseado na regra de validação do `CNPJ` e retorna `True` se o `CNPJ` é válido ou `False` se é inválido.
 
 ___
 
