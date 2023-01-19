@@ -5,31 +5,32 @@ ____
 ## Documentação
 
 ```
-get_cnpj()
+InputOptions
 ```
-##### A função `get_cnpj` é usada para buscar e salvar informações de um CNPJ. Ela usa o parâmetro cnpj_param para fazer uma chamada para outra função chamada `get_data`.
-##### A função `get_cnpj` então verifica se esses dados contêm um erro, e se sim, imprime uma mensagem e retorna None. Se não houver erro, a função então insere os dados recuperados no banco de dados MongoDB e retorna a lista de objetos de dados.
+##### Essa classe gerencia as opções de entrada do usuário. Ele solicita que o usuário selecione a opção 1 ou 2 e, em seguida, chama o método `get_cnpj` da classe 
+
+```
+GetCnpj
+```
+##### Essa classe é responsável por obter os dados do CNPJ a partir de uma ou mais APIs e inseri-los no banco de dados. Ele chama os métodos `validate_cnpj` da classe `Validate`, `get_data` da classe `ApiHandle` e `insert_to_db` da classe `Db` para realizar essas tarefas.
 
 -----
 ```
-get_data()
+Validate
 ```
-##### A função `get_data` é usada para buscar informações de um `CNPJ`. Ela usa o parâmetro `cnpj` para fazer uma chamada para duas diferentes `URLs`, `api1` e `api2`. Ela então tenta recuperar a resposta dessas chamadas usando o método `requests.get()`.
-##### Se a resposta for bem-sucedida e o status da resposta for `200`, os dados são adicionados à lista de dados. Se ocorrer algum erro ou o status da resposta for diferente de `200`, uma exceção será gerada e uma mensagem de erro será adicionada à lista de dados. A função retorna a lista de dados contendo as informações recuperadas.
-
+##### Essa classe é responsável por validar o CNPJ fornecido pelo usuário. Ele verifica se o CNPJ tem 14 dígitos e se os dígitos verificadores estão corretos.
 
 ---
 ```
-insert_to_db()
+ApiHandle
 ```
-##### A função `insert_to_db` é usada para inserir dados em um banco de dados. Ela usa o parâmetro `cnpj` como o dado a ser inserido
-##### Primeiro, ela tenta criar uma conexão com o banco de dados usando a `chave de cliente` fornecida. Em seguida, ela seleciona a coleção de CNPJs e insere o dado passado como parâmetro. Se ocorrer algum erro ao tentar inserir os dados, uma exceção será gerada e uma mensagem de erro será exibida.
+##### Essa classe é responsável por lidar com as chamadas à API e retornar os dados do CNPJ.
+
 
 ```
-validador_cnpj()
+Db
 ```
-##### Esta função valida um `CNPJ` passado como parâmetro.
-##### Ele remove qualquer caractere não numérico do `CNPJ`, verifica se o `CNPJ` tem 14 dígitos, calcula os dígitos verificadores baseado na regra de validação do `CNPJ` e retorna `True` se o `CNPJ` é válido ou `False` se é inválido.
+##### Essa classe é responsável por lidar com as operações no banco de dados, como inserir os dados do CNPJ
 
 ___
 
